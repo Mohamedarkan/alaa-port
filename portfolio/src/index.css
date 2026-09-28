@@ -262,10 +262,14 @@ html, body {
   color: var(--ink);
 }
 
+
 /* ==========================================================================
-   HORIZONTAL MOVING CAROUSEL (GLIDES LEFT TO RIGHT)
+   EXPERIMENTAL FASHION EDITORIAL STRIP (CONTINUOUS MOVING ARCHIVE MARQUEE)
+   Pure Black & White. Generous Whitespace. Subtle Asymmetry & Rotation.
+   Order: SEAL → VINYL → BUST → ROSE → SWORD → DERVISH → repeat
    ========================================================================== */
-.marquee-section {
+
+.archive-strip-section {
   width: 100vw;
   position: relative;
   left: 50%;
@@ -273,76 +277,75 @@ html, body {
   margin-left: -50vw;
   margin-right: -50vw;
   overflow: hidden;
-  padding: 4rem 0 6rem 0;
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
   background-color: var(--paper);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.5rem 0 2rem 0;
+  user-select: none;
 }
 
-.section-header {
-  max-width: 1400px;
-  margin: 0 auto 2.5rem auto;
-  padding: 0 3rem;
+/* Minimalist Editorial Header Ribbon */
+.strip-editorial-header {
+  max-width: 100%;
+  padding: 0 3rem 1.25rem 3rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.section-title-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.section-num {
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.3em;
-  color: var(--ink);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-}
-
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
   color: var(--ink);
-  margin: 0;
 }
 
-.marquee-hint {
-  font-family: var(--font-mono);
-  font-size: 11px;
+.strip-header-left, .strip-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.strip-header-ar {
+  font-family: var(--font-arabic);
+  font-size: 13px;
   font-weight: 700;
-  color: var(--ink);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  border-left: 1px solid var(--ink);
+  padding-left: 1rem;
 }
 
-.marquee-container {
+.strip-order-guide {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+}
+
+.strip-reg-tick {
+  font-size: 13px;
+}
+
+/* Strip Viewport & Seamless Infinite Track */
+.strip-viewport {
   width: 100%;
   overflow: hidden;
   position: relative;
+  padding: 4.5rem 0 5rem 0;
 }
 
-.marquee-track {
+.strip-motion-track {
   display: flex;
-  gap: 2.5rem;
+  align-items: center;
   width: max-content;
-  /* Continuously glides horizontally from Left to Right */
-  animation: scroll-left-to-right 38s linear infinite;
   will-change: transform;
+  /* Continuously glides horizontally from Left to Right */
+  animation: editorial-strip-flow 62s linear infinite;
 }
 
-.marquee-track:hover {
+.strip-motion-track:hover {
   animation-play-state: paused;
 }
 
-@keyframes scroll-left-to-right {
+@keyframes editorial-strip-flow {
   0% {
     transform: translate3d(-50%, 0, 0);
   }
@@ -351,215 +354,285 @@ html, body {
   }
 }
 
+.strip-specimen-group {
+  display: flex;
+  align-items: center;
+}
+
 /* ==========================================================================
-   MARQUEE CARD COMPONENT (INTAGLIO ARCHIVAL PLATE)
+   SPECIMEN PLATE CONTAINER (Editorial Fashion Monograph Specimen)
    ========================================================================== */
-.marquee-card {
-  width: 310px;
+.specimen-plate-container {
+  width: 340px;
   flex-shrink: 0;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
+  padding: 0 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  position: relative;
 }
 
-.marquee-card:hover {
-  transform: translateY(-8px);
+.specimen-plate-container:hover {
+  /* Subtle focus lift without breaking editorial flow */
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.08));
 }
 
-.card-media {
+.specimen-plate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 4px;
+}
+
+.specimen-acc {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+
+.specimen-ar-kicker {
+  font-family: var(--font-arabic);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Floating Art Frame with Pure White Space */
+.specimen-art-frame {
   width: 100%;
   aspect-ratio: 1 / 1;
   background-color: var(--paper);
-  border: 2px solid var(--ink);
+  border: 1px solid var(--ink);
   position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.25rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.card-svg-wrap {
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--paper);
+.specimen-plate-container:hover .specimen-art-frame {
+  border-width: 1.5px;
 }
 
-.card-svg-asset {
+.specimen-graphic-svg, .specimen-graphic-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
 
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Corner registration marks */
-.card-reg {
+/* Minimalist Corner Brackets */
+.specimen-tick {
   position: absolute;
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--ink);
   line-height: 1;
   pointer-events: none;
 }
-.card-reg.top-left { top: 6px; left: 6px; }
-.card-reg.top-right { top: 6px; right: 6px; }
-.card-reg.bottom-left { bottom: 6px; left: 6px; }
-.card-reg.bottom-right { bottom: 6px; right: 6px; }
+.specimen-tick.tl { top: 4px; left: 4px; }
+.specimen-tick.tr { top: 4px; right: 4px; }
+.specimen-tick.bl { bottom: 4px; left: 4px; }
+.specimen-tick.br { bottom: 4px; right: 4px; }
 
-.card-header-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  pointer-events: none;
-}
-
-.badge-acc {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  background-color: var(--paper);
-  padding: 2px 6px;
-  border: 1px solid var(--ink);
-}
-
-.badge-ar-name {
-  font-family: var(--font-arabic);
-  font-size: 12px;
-  font-weight: 700;
-  background-color: var(--paper);
-  padding: 1px 6px;
-  border: 1px solid var(--ink);
-}
-
-/* Card Hover Overlay */
-.card-hover-overlay {
+/* Understated Hover Cue */
+.specimen-hover-cue {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.96);
-  border: 2px solid var(--ink);
+  background-color: rgba(255, 255, 255, 0.94);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1.5rem;
+  gap: 6px;
   opacity: 0;
   transition: opacity 0.2s ease;
+  border: 1px solid var(--ink);
 }
 
-.marquee-card:hover .card-hover-overlay {
+.specimen-plate-container:hover .specimen-hover-cue {
   opacity: 1;
 }
 
-.overlay-btn {
-  width: 100%;
-  max-width: 200px;
-  padding: 10px 16px;
+.cue-action {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: 2px solid var(--ink);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.overlay-btn.primary {
-  background-color: var(--ink);
-  color: var(--paper);
-}
-.overlay-btn.primary:hover {
-  background-color: var(--paper);
+  letter-spacing: 0.25em;
   color: var(--ink);
 }
 
-.overlay-btn.secondary {
-  background-color: var(--paper);
+.cue-sub {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-style: italic;
   color: var(--ink);
 }
-.overlay-btn.secondary:hover {
-  background-color: var(--ink);
-  color: var(--paper);
-}
 
-.overlay-btn.reset {
-  background: none;
-  border: none;
-  font-size: 9px;
-  text-decoration: underline;
-  color: var(--ink);
-  cursor: pointer;
-}
-
-/* Card Info Row */
-.card-info {
+/* Specimen Footer Label */
+.specimen-plate-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 4px;
 }
 
-.card-title-row {
+.specimen-footer-top {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
 }
 
-.card-plate {
+.specimen-plate-no {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   color: var(--ink);
 }
 
-.card-name {
+.specimen-title-en {
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--ink);
 }
 
-.card-arabic-title {
+.specimen-title-ar {
   font-family: var(--font-arabic);
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
 }
 
-.card-dyad {
+.specimen-dyad-line {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink);
 }
 
-.card-class {
-  font-family: var(--font-serif);
+/* ==========================================================================
+   RESTRAINED ARCHIVAL SEPARATOR COMPONENT
+   ========================================================================== */
+.archival-separator-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rem;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.sep-num-ar {
+  font-family: var(--font-arabic);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.sep-rule-assembly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sep-hairline {
+  width: 1px;
+  flex: 1;
+  background-color: var(--ink);
+}
+
+.sep-glyph-node {
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sep-symbol {
   font-size: 11px;
   color: var(--ink);
-  font-style: italic;
+  line-height: 1;
+}
+
+.sep-meta-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+}
+
+.sep-coord-text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.sep-sub-text {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+.sep-crosshair {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+/* Editorial Footer Ribbon */
+.strip-editorial-footer {
+  max-width: 100%;
+  padding: 1.25rem 3rem 0 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.strip-footer-reg {
+  font-size: 13px;
+}
+
+.strip-footer-mono {
+  letter-spacing: 0.22em;
+}
+
+.strip-footer-pause-note {
+  font-size: 8.5px;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
 }
 
 /* ==========================================================================

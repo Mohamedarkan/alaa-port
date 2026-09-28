@@ -1,6 +1,73 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
+export const ARCHIVE_SEPARATORS = [
+  {
+    id: 'sep-1',
+    numAr: '٠١',
+    numEn: '01',
+    coord: '33°53′N / 35°30′E',
+    glyph: '•',
+    ruleHeight: 110,
+    sub: 'COLLECTION // SPECIMEN A'
+  },
+  {
+    id: 'sep-2',
+    numAr: '٠٢',
+    numEn: '02',
+    coord: 'BEIRUT // 33⅓ RPM',
+    glyph: '⌖',
+    ruleHeight: 135,
+    sub: 'SHELLAC // MATRIX 74'
+  },
+  {
+    id: 'sep-3',
+    numAr: '٠٣',
+    numEn: '03',
+    coord: 'AXIS // PHL-III',
+    glyph: '◇',
+    ruleHeight: 95,
+    sub: 'MARBLE // FRACTURE'
+  },
+  {
+    id: 'sep-4',
+    numAr: '٠٤',
+    numEn: '04',
+    coord: 'DAMASCUS // 1924',
+    glyph: '⊙',
+    ruleHeight: 125,
+    sub: 'FOLIA // ROSA DAMASCENA'
+  },
+  {
+    id: 'sep-5',
+    numAr: '٠٥',
+    numEn: '05',
+    coord: 'EXL // 33°N LATITUDE',
+    glyph: '+',
+    ruleHeight: 145,
+    sub: 'CHIVALRIC // SHAMSHIR'
+  },
+  {
+    id: 'sep-6',
+    numAr: '٠٦',
+    numEn: '06',
+    coord: 'ALEPPO // SEMA STUDY',
+    glyph: '⌖',
+    ruleHeight: 105,
+    sub: 'ORBITAL // REVOLUTION'
+  }
+];
+
+export const ARTIFACT_EDITORIAL_TRANSFORMS = {
+  1: { rotate: '-1.4deg', translateY: '-8px', scale: 0.98 },
+  2: { rotate: '2.2deg', translateY: '14px', scale: 1.01 },
+  3: { rotate: '-2.1deg', translateY: '-16px', scale: 0.97 },
+  4: { rotate: '1.6deg', translateY: '12px', scale: 1.0 },
+  5: { rotate: '-2.4deg', translateY: '-10px', scale: 1.02 },
+  6: { rotate: '1.8deg', translateY: '8px', scale: 1.01 }
+};
+
 export const ARCHIVE_ARTIFACTS = [
   {
     id: 1,
@@ -308,97 +375,119 @@ export default function App() {
             </div>
           </section>
 
-          {/* HORIZONTAL MOVING ARTIFACT STRIP (LEFT TO RIGHT) */}
-          <section className="marquee-section" id="marquee-strip">
-            <div className="section-header">
-              <div className="section-title-wrap">
-                <span className="section-num">ARCHIVE STRIP // 01 — 06</span>
-                <h2 className="section-title">THE SIX PLATES • اللَّوْحَاتُ السِّتّ</h2>
+          {/* ==========================================================================
+          EXPERIMENTAL FASHION EDITORIAL STRIP (CONTINUOUS MOVING ARCHIVE MARQUEE)
+          Order: SEAL → VINYL → BUST → ROSE → SWORD → DERVISH → repeat
+          ========================================================================== */}
+          <section className="archive-strip-section" id="marquee-strip">
+            {/* Minimalist Archival Header Ribbon */}
+            <div className="strip-editorial-header">
+              <div className="strip-header-left">
+                <span className="strip-reg-tick">+</span>
+                <span className="strip-header-label">THE ARCHIVE // CONTINUOUS CODEX STRIP</span>
+                <span className="strip-header-ar">شَرِيطُ المَحْفُوظَاتِ المَسْتُورَة</span>
               </div>
-              <div className="marquee-actions">
-                <span className="marquee-hint">← GLIDING LEFT TO RIGHT • CLICK TO INSPECT DOSSIER</span>
+              <div className="strip-header-right">
+                <span className="strip-order-guide">SEAL → VINYL → BUST → ROSE → SWORD → DERVISH</span>
+                <span className="strip-reg-tick">+</span>
               </div>
             </div>
 
-            <div className="marquee-container">
-              <div className="marquee-track">
-                {marqueeItems.map((item, index) => {
-                  const hasCustom = Boolean(photos[item.id]);
-                  return (
-                    <div
-                      key={'marquee-' + item.id + '-' + index}
-                      className="marquee-card"
-                      onClick={() => handleCardClick(item)}
-                      title="Click to inspect archival dossier"
-                    >
-                      {/* Card Media Container */}
-                      <div className="card-media">
-                        {hasCustom ? (
-                          <img src={photos[item.id]} alt={item.titleEn} className="card-img" />
-                        ) : (
-                          <div className="card-svg-wrap">
-                            <img src={item.svgPath} alt={item.titleEn} className="card-svg-asset" />
-                          </div>
-                        )}
+            {/* Continuous Seamless Infinite Moving Ribbon (Left to Right) */}
+            <div className="strip-viewport">
+              <div className="strip-motion-track">
+                {/* We render Set A and Set B for 100% seamless linear infinite loop */}
+                {[0, 1].map((setIndex) => (
+                  <div key={'strip-set-' + setIndex} className="strip-specimen-group">
+                    {ARCHIVE_ARTIFACTS.map((artifact, itemIndex) => {
+                      const sep = ARCHIVE_SEPARATORS[itemIndex];
+                      const transform = ARTIFACT_EDITORIAL_TRANSFORMS[artifact.id] || { rotate: '0deg', translateY: '0px', scale: 1 };
+                      const hasCustom = Boolean(photos[artifact.id]);
 
-                        {/* Corner Archival Registration Ticks */}
-                        <span className="card-reg top-left">┌</span>
-                        <span className="card-reg top-right">┐</span>
-                        <span className="card-reg bottom-left">└</span>
-                        <span className="card-reg bottom-right">┘</span>
-
-                        {/* Top Accession Stamp */}
-                        <div className="card-header-badge">
-                          <span className="badge-acc">{item.accession}</span>
-                          <span className="badge-ar-name">{item.titleAr}</span>
-                        </div>
-
-                        {/* Hover Overlay with Action Buttons */}
-                        <div className="card-hover-overlay">
-                          <button
-                            type="button"
-                            className="overlay-btn primary"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleCardClick(item);
+                      return (
+                        <React.Fragment key={'specimen-' + setIndex + '-' + artifact.id}>
+                          {/* THE SPECIMEN PLATE */}
+                          <div
+                            className="specimen-plate-container"
+                            style={{
+                              transform: `translateY(${transform.translateY}) rotate(${transform.rotate}) scale(${transform.scale})`
                             }}
+                            onClick={() => handleCardClick(artifact)}
+                            title={`Examine ${artifact.titleEn} (${artifact.titleAr})`}
                           >
-                            INSPECT DOSSIER
-                          </button>
-                          <button
-                            type="button"
-                            className="overlay-btn secondary"
-                            onClick={(e) => triggerUploadForArtifact(item.id, e)}
-                            title="Replace slot with custom photograph"
-                          >
-                            {hasCustom ? 'CHANGE PHOTO' : '+ ADD PHOTO'}
-                          </button>
-                          {hasCustom && (
-                            <button
-                              type="button"
-                              className="overlay-btn reset"
-                              onClick={(e) => resetPhoto(item.id, e)}
-                            >
-                              RESET EMBLEM
-                            </button>
-                          )}
-                        </div>
-                      </div>
+                            {/* Specimen Fine Header */}
+                            <div className="specimen-plate-header">
+                              <span className="specimen-acc">{artifact.accession}</span>
+                              <span className="specimen-ar-kicker">{artifact.titleAr}</span>
+                            </div>
 
-                      {/* Card Information Footer */}
-                      <div className="card-info">
-                        <div className="card-title-row">
-                          <span className="card-plate">{item.number} / VI</span>
-                          <span className="card-name">{item.titleEn}</span>
-                          <span className="card-arabic-title">{item.titleAr}</span>
-                        </div>
-                        <span className="card-dyad">{item.dyadEn}</span>
-                        <span className="card-class">{item.classification}</span>
-                      </div>
-                    </div>
-                  );
-                })}
+                            {/* Specimen Artwork Floating in Generous Whitespace */}
+                            <div className="specimen-art-frame">
+                              {hasCustom ? (
+                                <img src={photos[artifact.id]} alt={artifact.titleEn} className="specimen-graphic-img" />
+                              ) : (
+                                <img src={artifact.svgPath} alt={artifact.titleEn} className="specimen-graphic-svg" />
+                              )}
+
+                              {/* Subtle Corner Registration Ticks */}
+                              <span className="specimen-tick tl">┌</span>
+                              <span className="specimen-tick tr">┐</span>
+                              <span className="specimen-tick bl">└</span>
+                              <span className="specimen-tick br">┘</span>
+
+                              {/* Hover Archival Inspection Tooltip */}
+                              <div className="specimen-hover-cue">
+                                <span className="cue-action">[ EXAMINE DOSSIER ]</span>
+                                <span className="cue-sub">Click to inspect artifact</span>
+                              </div>
+                            </div>
+
+                            {/* Understated Physical Print Label */}
+                            <div className="specimen-plate-footer">
+                              <div className="specimen-footer-top">
+                                <span className="specimen-plate-no">{artifact.plate}</span>
+                                <span className="specimen-title-en">{artifact.titleEn}</span>
+                                <span className="specimen-title-ar">{artifact.titleAr}</span>
+                              </div>
+                              <span className="specimen-dyad-line">{artifact.dyadEn}</span>
+                            </div>
+                          </div>
+
+                          {/* RESTRAINED ARCHIVAL SEPARATOR BETWEEN SYMBOLS */}
+                          <div className="archival-separator-unit">
+                            {/* Top Arabic Numeral */}
+                            <span className="sep-num-ar">{sep.numAr}</span>
+
+                            {/* Thin Vertical Rule with Subtle Registration Glyph */}
+                            <div className="sep-rule-assembly" style={{ height: `${sep.ruleHeight}px` }}>
+                              <div className="sep-hairline top" />
+                              <div className="sep-glyph-node">
+                                <span className="sep-symbol">{sep.glyph}</span>
+                              </div>
+                              <div className="sep-hairline bottom" />
+                            </div>
+
+                            {/* Micro Typographic Coordinates & Notes */}
+                            <div className="sep-meta-stack">
+                              <span className="sep-coord-text">{sep.coord}</span>
+                              <span className="sep-sub-text">{sep.sub}</span>
+                              <span className="sep-crosshair">+</span>
+                            </div>
+                          </div>
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                ))}
               </div>
+            </div>
+
+            {/* Minimalist Archival Footer Ribbon */}
+            <div className="strip-editorial-footer">
+              <span className="strip-footer-reg">⌖</span>
+              <span className="strip-footer-mono">MONOCHROME INTAGLIO SPECIMEN REEL • CONTINUOUS HORIZONTAL FLOW</span>
+              <span className="strip-footer-pause-note">HOVER SPECIMEN TO PAUSE • CLICK TO OPEN CURATED DOSSIER</span>
+              <span className="strip-footer-reg">⌖</span>
             </div>
 
             {/* Hidden native file input for optional user photo replacement */}
