@@ -284,19 +284,13 @@ export default function App() {
         {/* Minimal Archival Navigation Bar */}
         <header className="navbar-header">
           <div className="avatar-placeholder" onClick={triggerWink} style={{ cursor: 'pointer' }} title="Codex Emblem" />
-          <div className="nav-brand">
-            <span className="nav-brand-title">THE ARCHIVE</span>
-          </div>
-          <nav className="nav-links">
-            <a href="#hero">Hero</a>
-            <a href="#codex-strip">Strip</a>
-          </nav>
+          
+          
         </header>
 
         <main className="main-content">
           {/* CENTERED HERO SECTION - CLEAN & BOLD */}
           <section className="hero-section" id="hero">
-            <span className="hero-tag">THE ARCHIVE // 2026</span>
             <h1 className="hero-title">ALAA</h1>
           </section>
 
@@ -305,18 +299,6 @@ export default function App() {
           Order: SEAL → VINYL → BUST → ROSE → SWORD → DERVISH → repeat
           ========================================================================== */}
           <section className="archive-strip-section" id="codex-strip">
-            {/* Minimalist Top Guide Ribbon */}
-            <div className="strip-editorial-header">
-              <div className="strip-header-left">
-                <span className="strip-reg-tick">+</span>
-                <span className="strip-header-label">THE ARCHIVE // MOVING RIVER OF OBJECTS</span>
-              </div>
-              <div className="strip-header-right">
-                <span className="strip-order-guide">SEAL → VINYL → BUST → ROSE → SWORD → DERVISH</span>
-                <span className="strip-reg-tick">+</span>
-              </div>
-            </div>
-
             {/* Continuous Seamless Infinite Moving Ribbon (Left to Right) */}
             <div className="strip-viewport">
               <div className="strip-motion-track">
@@ -396,12 +378,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Minimalist Bottom Ribbon */}
-            <div className="strip-editorial-footer">
-              <span className="strip-footer-reg">⌖</span>
-              <span className="strip-footer-mono">CONTINUOUS MONOCHROME STRIP • HOVER TO PAUSE</span>
-              <span className="strip-footer-reg">⌖</span>
-            </div>
+            
 
             {/* Hidden native file input for optional user photo replacement */}
             <input
@@ -417,8 +394,8 @@ export default function App() {
         {/* Minimal Clean Footer */}
         <footer className="clean-minimal-footer">
           <div className="footer-line">
-            <span>THE ARCHIVE // MMXXVI</span>
-            <span>PURE MONOCHROME</span>
+            <span>ALAA</span>
+            <span>MMXXVI</span>
           </div>
         </footer>
       </motion.div>
