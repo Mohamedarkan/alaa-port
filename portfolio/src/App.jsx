@@ -1,9 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+
+const INITIAL_PLACEHOLDERS = [
+  { id: 1, title: 'Editorial Look 01', tag: 'Paris Haute Couture' },
+  { id: 2, title: 'Runway Archive 02', tag: 'Milan Spring / Summer' },
+  { id: 3, title: 'Studio Study 03', tag: 'Vogue Portrait Series' },
+  { id: 4, title: 'Sculptural Form 04', tag: 'Monochrome Drapery' },
+  { id: 5, title: 'Architectural Light 05', tag: 'Natural Shadows' },
+  { id: 6, title: 'Campaign Preview 06', tag: 'Autumn Winter 2026' },
+];
 
 export default function App() {
   const [phase, setPhase] = useState('void');
   const [isHoverWinking, setIsHoverWinking] = useState(false);
+  const [photos, setPhotos] = useState({});
+  const [activeUploadId, setActiveUploadId] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const revealTimer = setTimeout(() => setPhase('reveal'), 800);
@@ -24,7 +36,24 @@ export default function App() {
     }
   };
 
+  const handleCardClick = (id) => {
+    setActiveUploadId(id);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file && activeUploadId !== null) {
+      const url = URL.createObjectURL(file);
+      setPhotos((prev) => ({ ...prev, [activeUploadId]: url }));
+    }
+  };
+
   const isWinking = phase === 'wink' || isHoverWinking;
+  const marqueeItems = [...INITIAL_PLACEHOLDERS, ...INITIAL_PLACEHOLDERS];
 
   return (
     <div className="portfolio-wrapper">
@@ -122,24 +151,81 @@ export default function App() {
           <div className="avatar-placeholder" onClick={triggerWink} style={{ cursor: 'pointer' }} />
           <nav className="nav-links">
             <a href="#work">Work</a>
-            <a href="#archive">Archive</a>
+            <a href="#carousel">Archive</a>
             <a href="#about">Bio</a>
             <a href="#contact">Contact</a>
           </nav>
         </header>
 
         <main className="main-content">
+          {/* CENTERED HERO SECTION */}
           <section className="hero-section">
+            <span className="hero-tag">Model Portfolio / 2026</span>
             <h1 className="hero-title">ALAA</h1>
             <div className="hero-desc">
-              <p className="hero-tag">Model Portfolio / 2026</p>
               <p className="hero-text">
                 High-end fashion silhouette, editorial campaigns, and runway archives. Refined proportions with sculptural identity.
               </p>
             </div>
           </section>
 
-          <section className="gallery-grid">
+          {/* HORIZONTAL MOVING OBJECTS PLACEHOLDER (LEFT TO RIGHT) */}
+          <section className="marquee-section" id="carousel">
+            <div className="section-header">
+              <div className="section-title-wrap">
+                <span className="section-num">01 / FEATURED ARCHIVE</span>
+                <h2 className="section-title">EDITORIAL STRIP</h2>
+              </div>
+              <span className="marquee-hint">Hover to pause • Click card to add photo</span>
+            </div>
+
+            <div className="marquee-container">
+              <div className="marquee-track">
+                {marqueeItems.map((item, index) => (
+                  <div
+                    key={'card-' + item.id + '-' + index}
+                    className="marquee-card"
+                    onClick={() => handleCardClick(item.id)}
+                    title="Click to add photo"
+                  >
+                    <div className="card-media">
+                      {photos[item.id] ? (
+                        <img src={photos[item.id]} alt={item.title} className="card-img" />
+                      ) : (
+                        <div className="card-placeholder">
+                          <div className="placeholder-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                              <line x1="12" y1="5" x2="12" y2="19"></line>
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                          </div>
+                          <span className="placeholder-label">Add Picture</span>
+                          <span className="placeholder-sub">Click to upload</span>
+                        </div>
+                      )}
+                      <span className="card-badge">{'0' + item.id}</span>
+                    </div>
+                    <div className="card-info">
+                      <span className="card-title">{item.title}</span>
+                      <span className="card-tag">{item.tag}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Hidden native file input for upload */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </section>
+
+          {/* EDITORIAL GALLERY GRID */}
+          <section className="gallery-grid" id="work">
             <div className="gallery-card large">
               <div className="image-placeholder">Editorial Image 01</div>
             </div>
