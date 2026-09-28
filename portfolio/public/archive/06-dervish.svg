@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <rect width="600" height="600" fill="#FFFFFF"/>
+  
+  <!-- Outer Archival Crop Marks & Registration -->
+  <rect x="20" y="20" width="560" height="560" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <rect x="26" y="26" width="548" height="548" fill="none" stroke="#000000" stroke-width="0.75" stroke-dasharray="4 2"/>
+  
+  <!-- Corner Registration Brackets -->
+  <path d="M10,20 L20,20 L20,10" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <path d="M590,20 L580,20 L580,10" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <path d="M10,580 L20,580 L20,590" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <path d="M590,580 L580,580 L580,590" fill="none" stroke="#000000" stroke-width="1.5"/>
+
+  <!-- Center Crosshairs -->
+  <path d="M300,8 L300,20 M300,580 L300,592 M8,300 L20,300 M580,300 L592,300" stroke="#000000" stroke-width="1"/>
+
+  <!-- Archival Metadata Header -->
+  <text x="36" y="44" font-family="'Space Mono', monospace, sans-serif" font-size="9" font-weight="700" letter-spacing="1.5" fill="#000000">THE ARCHIVE // الأرشيف</text>
+  <text x="564" y="44" text-anchor="end" font-family="'Space Mono', monospace, sans-serif" font-size="9" font-weight="700" letter-spacing="1.5" fill="#000000">ARC.06 / SFM</text>
+  
+  <!-- Archival Metadata Footer -->
+  <text x="36" y="562" font-family="'Space Mono', monospace, sans-serif" font-size="9" font-weight="700" letter-spacing="2" fill="#000000">PLATE 06</text>
+  <text x="300" y="562" text-anchor="middle" font-family="'Amiri', 'Traditional Arabic', serif" font-size="12" font-weight="700" fill="#000000">الدَّرْوِيش — THE DERVISH</text>
+  <text x="564" y="562" text-anchor="end" font-family="'Space Mono', monospace, sans-serif" font-size="9" letter-spacing="1" fill="#000000">EDITION 1/1 • MONO</text>
+  
+
+  <g transform="translate(0, -6)">
+    <!-- Centrifugal Whirling Cosmic Orbits in background -->
+    <ellipse cx="300" cy="330" rx="200" ry="80" fill="none" stroke="#000000" stroke-width="0.8" stroke-dasharray="6 4" transform="rotate(-8 300 330)"/>
+    <ellipse cx="300" cy="330" rx="160" ry="60" fill="none" stroke="#000000" stroke-width="0.5" stroke-dasharray="3 3" transform="rotate(12 300 330)"/>
+
+    <!-- Circular Sufi Calligraphy along orbit arc -->
+    <def>
+      <path id="orbitArc" d="M 120,310 C 180,240 420,240 480,310" fill="none"/>
+    </def>
+    <text font-family="'Amiri', serif" font-size="13" font-weight="700" letter-spacing="2" fill="#000000">
+      <textPath href="#orbitArc" startOffset="50%" text-anchor="middle">
+        فَلَا شَيْءَ فِي الوُجُودِ إِلَّا الحُضُور
+      </textPath>
+    </text>
+
+    <!-- Head & Sikke (Conical Cap inclined at ecstatic angle) -->
+    <g transform="rotate(14 300 170)">
+      <!-- Tall felt Sikke cap -->
+      <polygon points="288,105 312,105 318,162 282,162" fill="#000000"/>
+      <!-- Cap brim band in white -->
+      <rect x="280" y="156" width="40" height="6" fill="#FFFFFF"/>
+      <rect x="280" y="156" width="40" height="6" fill="none" stroke="#000000" stroke-width="1.5"/>
+      <!-- Head / Face profile looking downward in submission -->
+      <path d="M 288,162 C 282,175 285,190 294,196 C 304,198 312,192 314,180 Z" fill="#000000"/>
+    </g>
+
+    <!-- Torso & Arms (Ecstatic Cross-Polar Geometry) -->
+    <!-- Right Arm: Raised Heavenward (receiving light) -->
+    <path d="M 300,195 L 375,130 L 388,142 L 315,210 Z" fill="#000000"/>
+    <!-- Right Open Palm Facing Up -->
+    <path d="M 375,130 C 382,118 396,118 402,126 C 406,132 400,140 388,142 Z" fill="#000000"/>
+
+    <!-- Left Arm: Lowered Earthward (transmitting light) -->
+    <path d="M 290,210 L 210,265 L 198,252 L 280,195 Z" fill="#000000"/>
+    <!-- Left Open Palm Facing Down -->
+    <path d="M 210,265 C 200,274 190,270 186,260 C 182,254 190,248 198,252 Z" fill="#000000"/>
+
+    <!-- Torso Vest / Destegul garment wrapped tight -->
+    <polygon points="280,195 320,195 330,265 270,265" fill="#000000"/>
+    <!-- Belt / Kamarband in white -->
+    <rect x="268" y="260" width="64" height="8" fill="#FFFFFF"/>
+    <rect x="268" y="260" width="64" height="8" fill="none" stroke="#000000" stroke-width="1.5"/>
+
+    <!-- The Whirling Skirt (Tanoura): Monumental Centrifugal Architectural Bell -->
+    <!-- Solid Black Silhouette with Sweeping Flared Silhouette -->
+    <path d="
+      M 268,268
+      C 220,290 140,360 115,445
+      C 160,470 240,480 300,480
+      C 360,480 440,470 485,445
+      C 460,360 380,290 332,268
+      Z
+    " fill="#000000"/>
+
+    <!-- Sharp Architectural Knife-Pleats Carved in Stark White Negative Space -->
+    <!-- Radiating from the cinched waist to the sweeping hem -->
+    <path d="M 285,268 C 255,330 200,400 160,455" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    <path d="M 292,268 C 275,340 245,415 220,468" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+    <path d="M 300,268 C 300,350 295,425 285,475" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    <path d="M 308,268 C 315,350 330,425 350,475" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+    <path d="M 315,268 C 335,340 375,410 415,462" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    <path d="M 324,268 C 355,330 410,395 450,450" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+
+    <!-- Dynamic Hemline Undulations -->
+    <path d="
+      M 115,445
+      Q 140,460 160,455
+      Q 190,472 220,468
+      Q 255,482 285,475
+      Q 318,482 350,475
+      Q 385,470 415,462
+      Q 450,460 485,445
+    " fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+
+    <!-- Archival Sema Inscription -->
+    <text x="300" y="508" text-anchor="middle" font-family="'Amiri', serif" font-size="15" font-weight="700" letter-spacing="1" fill="#000000">
+      الوَجْدُ وَالفَنَاءُ وَالحَرَكَة
+    </text>
+    <text x="300" y="526" text-anchor="middle" font-family="'Space Mono', monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#000000">
+      SUFI KINETIC STUDY // ALEPPO SEMA 1912
+    </text>
+  </g>
+</svg>

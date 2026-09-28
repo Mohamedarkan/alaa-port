@@ -1,13 +1,97 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const INITIAL_PLACEHOLDERS = [
-  { id: 1, title: 'Editorial Look 01', tag: 'Paris Haute Couture' },
-  { id: 2, title: 'Runway Archive 02', tag: 'Milan Spring / Summer' },
-  { id: 3, title: 'Studio Study 03', tag: 'Vogue Portrait Series' },
-  { id: 4, title: 'Sculptural Form 04', tag: 'Monochrome Drapery' },
-  { id: 5, title: 'Architectural Light 05', tag: 'Natural Shadows' },
-  { id: 6, title: 'Campaign Preview 06', tag: 'Autumn Winter 2026' },
+export const ARCHIVE_ARTIFACTS = [
+  {
+    id: 1,
+    number: '01',
+    accession: 'ARC.01 / IDN',
+    titleEn: 'THE SEAL',
+    titleAr: 'الخَاتَم',
+    dyadEn: 'IDENTITY / BIOGRAPHY',
+    dyadAr: 'الأَثَـرُ وَالسِّيرَة',
+    classification: 'Wax & Brass Matrix // Intaglio Seal Impression',
+    symbolism: 'Arabic Literary Heritage & Personal Sovereignty',
+    quoteAr: 'مَنْ كَانَ بِلَا أَثَرٍ كَانَ كَمَنْ لَمْ يَعْبُر • خَاتَمُ السِّيرَةِ وَالمَحْفُوظَاتِ الخَاصَّةِ لِتَوْثِيقِ الوُجُودِ فِي مُوَاجَهَةِ الفَنَاءِ.',
+    quoteEn: 'He who leaves no trace walks as though he never crossed. The seal of private codices, forging biography against oblivion.',
+    svgPath: '/archive/01-seal.svg',
+    plate: 'PLATE 01'
+  },
+  {
+    id: 2,
+    number: '02',
+    accession: 'ARC.02 / SND',
+    titleEn: 'THE VINYL',
+    titleAr: 'الأُسْطُوَانَة',
+    dyadEn: 'SOLITUDE / MUSIC / MEMORY',
+    dyadAr: 'العُزْلَةُ وَالصَّوْتُ وَالذَّاكِرَة',
+    classification: 'Beirut 1974 // Shellac Micro-Groove Disc • 33⅓ RPM',
+    symbolism: 'Vintage Lebanese Music Culture & Melancholic Solitude',
+    quoteAr: 'صَوْتٌ خَارِجٌ مِنْ رُكَامِ بَيْرُوتَ القَدِيمَة؛ حَيْثُ تَلْتَقِي نَبْرَةُ فَيْرُوز بِعُزْلَةِ زِيَاد، مَحْفُورَةً فِي دَوَرَانِ أُسْطُوَانَةٍ لَا تَتَوَقَّف.',
+    quoteEn: 'A sound rising from the rubble of old Beirut; where Fairouz\'s longing meets Ziad\'s quiet despair, pressed into infinite rotations.',
+    svgPath: '/archive/02-vinyl.svg',
+    plate: 'PLATE 02'
+  },
+  {
+    id: 3,
+    number: '03',
+    accession: 'ARC.03 / PHL',
+    titleEn: 'THE BUST',
+    titleAr: 'التِّمْثَال',
+    dyadEn: 'PHILOSOPHY / FRACTURED THOUGHT',
+    dyadAr: 'الفِكْرُ الكَلَاسِيكِيُّ وَالشَّتَات',
+    classification: 'Levantine Antique Cast // Bisected Marble Profile',
+    symbolism: 'Classical Philosophy & Existential Literature (Averroes / Camus)',
+    quoteAr: 'أَنَا أُفَكِّرُ إِذَنْ أَنَا مَنْفِيّ • حِوَارٌ بَيْنَ رُشْدِيَّةِ القُرْطُبِيِّ وَعَدَمِيَّةِ الغُرَبَاءِ؛ فِكْرٌ مَشْطُورٌ وَعَقْلٌ يَسْكُنُ الشَّتَات.',
+    quoteEn: 'I think, therefore I am exiled. Classical intellect cleaved by existential doubt; the mind as an unresolved fracture.',
+    svgPath: '/archive/03-bust.svg',
+    plate: 'PLATE 03'
+  },
+  {
+    id: 4,
+    number: '04',
+    accession: 'ARC.04 / LIT',
+    titleEn: 'THE ROSE',
+    titleAr: 'الوَرْدَة',
+    dyadEn: 'LOVE / LONGING / POETRY',
+    dyadAr: 'الشَّوْقُ وَالغَزَلُ وَالشِّعْر',
+    classification: 'Herbarium Specimen // Woodcut Engraving (Rosa Damascena)',
+    symbolism: 'Classical Botanical Engraving & Levantine Poetic Ghazal',
+    quoteAr: 'يَا نَاعِماً كَالشَّوْكِ فِي كَبِدِي • وَرْدَةٌ دِمَشْقِيَّةٌ بَرِّيَّةٌ صَلْبَة؛ شَوْكُهَا حَادٌّ كَالحَنِين، وَأَوْرَاقُهَا سُطُورُ غَزَلٍ لَمْ يَكْتَمِل.',
+    quoteEn: 'O gentle as the thorn in my breast. A wild Damascene briar; love stripped of sentimentality, sharp with the pain of longing.',
+    svgPath: '/archive/04-rose.svg',
+    plate: 'PLATE 04'
+  },
+  {
+    id: 5,
+    number: '05',
+    accession: 'ARC.05 / EXL',
+    titleEn: 'THE SWORD',
+    titleAr: 'السَّيْف',
+    dyadEn: 'EXILE / ENDURANCE / WANDERING',
+    dyadAr: 'الفُرُوسِيَّةُ وَالصَّبْرُ وَالتِّيه',
+    classification: 'Damascene High-Carbon Steel // Shamshir Blade',
+    symbolism: 'Arab Chivalric Symbolism & Chivalric Code (Al-Mutanabbi)',
+    quoteAr: 'وَالصَّبْرُ أَمْضَى مِنْ حُسَامِ التِّيهِ • سَيْفٌ مَشْرِقِيٌّ لَمْ يُشْهَرْ لِغَزْوٍ بَلْ لِصَلَابَةِ الرُّوحِ فِي مَفَازَاتِ التَّشَرُّدِ وَالغُرْبَة.',
+    quoteEn: 'Endurance is keener than the blade of wandering. The curved steel of chivalric patience across deserts of solitary exile.',
+    svgPath: '/archive/05-sword.svg',
+    plate: 'PLATE 05'
+  },
+  {
+    id: 6,
+    number: '06',
+    accession: 'ARC.06 / SFM',
+    titleEn: 'THE DERVISH',
+    titleAr: 'الدَّرْوِيش',
+    dyadEn: 'TRANSCENDENCE / MOVEMENT / SURRENDER',
+    dyadAr: 'الوَجْدُ وَالفَنَاءُ وَالارْتِقَاء',
+    classification: 'Kinetic Architectural Study // Aleppo Sema Archive 1912',
+    symbolism: 'Sufi Architectural Movement & Cosmic Centrifugal Rotation',
+    quoteAr: 'فَلَا شَيْءَ فِي الوُجُودِ إِلَّا الحُضُور • دَوَرَانٌ صُوفِيٌّ هَنْدَسِيٌّ يَخْلَعُ ثِقَلَ المَادَّة؛ يَدٌ تَسْتَقْبِلُ السَّمَاءَ وَيَدٌ تُفِيضُ عَلَى التُّرَاب.',
+    quoteEn: 'Nothing exists except the Presence. The geometry of spiritual ecstasy; the body becoming pure architectural velocity.',
+    svgPath: '/archive/06-dervish.svg',
+    plate: 'PLATE 06'
+  }
 ];
 
 export default function App() {
@@ -15,6 +99,7 @@ export default function App() {
   const [isHoverWinking, setIsHoverWinking] = useState(false);
   const [photos, setPhotos] = useState({});
   const [activeUploadId, setActiveUploadId] = useState(null);
+  const [selectedArtifact, setSelectedArtifact] = useState(null);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +121,12 @@ export default function App() {
     }
   };
 
-  const handleCardClick = (id) => {
+  const handleCardClick = (artifact) => {
+    setSelectedArtifact(artifact);
+  };
+
+  const triggerUploadForArtifact = (id, e) => {
+    if (e) e.stopPropagation();
     setActiveUploadId(id);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -52,12 +142,22 @@ export default function App() {
     }
   };
 
+  const resetPhoto = (id, e) => {
+    if (e) e.stopPropagation();
+    setPhotos((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
+  };
+
   const isWinking = phase === 'wink' || isHoverWinking;
-  const marqueeItems = [...INITIAL_PLACEHOLDERS, ...INITIAL_PLACEHOLDERS];
+  // Double array for seamless infinite marquee loop
+  const marqueeItems = [...ARCHIVE_ARTIFACTS, ...ARCHIVE_ARTIFACTS];
 
   return (
     <div className="portfolio-wrapper">
-      {/* CONTINUOUS LOGO / AVATAR LAYER */}
+      {/* CONTINUOUS LOGO / AVATAR LAYER (Pure Black Ink Archival Founder Silhouette) */}
       <motion.div
         className="avatar-container"
         initial={{
@@ -109,7 +209,7 @@ export default function App() {
               transform="translate(0, -190)"
             />
 
-            {/* Right eyebrow: full vector layer animating the entire eyebrow naturally */}
+            {/* Right eyebrow: animating naturally via vector motion */}
             <motion.g
               initial={{ y: 0, scaleY: 1, rotate: 0 }}
               animate={{
@@ -140,81 +240,168 @@ export default function App() {
         </div>
       </motion.div>
 
-      {/* EDITORIAL PORTFOLIO CONTENT */}
+      {/* EDITORIAL ARCHIVE CONTENT */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: phase === 'navbar' ? 1 : 0 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         className="content-container"
       >
+        {/* Top Archival Navigation Bar */}
         <header className="navbar-header">
-          <div className="avatar-placeholder" onClick={triggerWink} style={{ cursor: 'pointer' }} />
+          <div className="avatar-placeholder" onClick={triggerWink} style={{ cursor: 'pointer' }} title="Codex Emblem" />
+          <div className="nav-brand">
+            <span className="nav-brand-title">THE ARCHIVE</span>
+            <span className="nav-brand-arabic">الأَرْشِيفُ الشَّخْصِيُّ</span>
+          </div>
           <nav className="nav-links">
-            <a href="#work">Work</a>
-            <a href="#carousel">Archive</a>
-            <a href="#about">Bio</a>
-            <a href="#contact">Contact</a>
+            <a href="#hero">Genesis</a>
+            <a href="#marquee-strip">Codex Strip</a>
+            <a href="#catalogue">Index</a>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#colophon">Colophon</a>
           </nav>
         </header>
 
         <main className="main-content">
-          {/* CENTERED HERO SECTION */}
-          <section className="hero-section">
-            <span className="hero-tag">Model Portfolio / 2026</span>
+          {/* CENTERED HERO SECTION - THE ARCHIVE / ALAA */}
+          <section className="hero-section" id="hero">
+            <div className="archival-stamp-badge">
+              <span className="badge-reg">+</span>
+              <span className="badge-text">ACCESSION NO. 2026 // CODEX ALAA</span>
+              <span className="badge-arabic">المَحْفُوظَاتُ الخَاصَّة</span>
+              <span className="badge-reg">+</span>
+            </div>
+
             <h1 className="hero-title">ALAA</h1>
-            <div className="hero-desc">
-              <p className="hero-text">
-                High-end fashion silhouette, editorial campaigns, and runway archives. Refined proportions with sculptural identity.
+
+            <div className="hero-tagline-wrap">
+              <p className="hero-tagline-ar">
+                مَجْمُوعَةٌ أَرْشِيفِيَّةٌ تَجْمَعُ بَيْنَ الفُرُوسِيَّةِ، الفِكْرِ الكَلَاسِيكِيِّ، وَالصَّوْتِ اللُّبْنَانِيِّ القَدِيم
               </p>
+              <p className="hero-tagline-en">
+                A monochrome personal codex forged in pure black and white. Blending Arabic literary heritage, classical philosophy, archival printmaking, and brutalist high-fashion editorial silhouettes.
+              </p>
+            </div>
+
+            {/* Archival Specification Bar */}
+            <div className="archival-spec-bar">
+              <div className="spec-item">
+                <span className="spec-label">MEDIUM</span>
+                <span className="spec-val">INTAGLIO & WOODCUT</span>
+              </div>
+              <div className="spec-divider">/</div>
+              <div className="spec-item">
+                <span className="spec-label">PALETTE</span>
+                <span className="spec-val">PURE BLACK & PURE WHITE</span>
+              </div>
+              <div className="spec-divider">/</div>
+              <div className="spec-item">
+                <span className="spec-label">SYMBOLS</span>
+                <span className="spec-val">VI ARCHIVAL PLATES</span>
+              </div>
+              <div className="spec-divider">/</div>
+              <div className="spec-item">
+                <span className="spec-label">CURATION</span>
+                <span className="spec-val">ALAA ESTATE // MMXXVI</span>
+              </div>
             </div>
           </section>
 
-          {/* HORIZONTAL MOVING OBJECTS PLACEHOLDER (LEFT TO RIGHT) */}
-          <section className="marquee-section" id="carousel">
+          {/* HORIZONTAL MOVING ARTIFACT STRIP (LEFT TO RIGHT) */}
+          <section className="marquee-section" id="marquee-strip">
             <div className="section-header">
               <div className="section-title-wrap">
-                <span className="section-num">01 / FEATURED ARCHIVE</span>
-                <h2 className="section-title">EDITORIAL STRIP</h2>
+                <span className="section-num">ARCHIVE STRIP // 01 — 06</span>
+                <h2 className="section-title">THE SIX PLATES • اللَّوْحَاتُ السِّتّ</h2>
               </div>
-              <span className="marquee-hint">Hover to pause • Click card to add photo</span>
+              <div className="marquee-actions">
+                <span className="marquee-hint">← GLIDING LEFT TO RIGHT • CLICK TO INSPECT DOSSIER</span>
+              </div>
             </div>
 
             <div className="marquee-container">
               <div className="marquee-track">
-                {marqueeItems.map((item, index) => (
-                  <div
-                    key={'card-' + item.id + '-' + index}
-                    className="marquee-card"
-                    onClick={() => handleCardClick(item.id)}
-                    title="Click to add photo"
-                  >
-                    <div className="card-media">
-                      {photos[item.id] ? (
-                        <img src={photos[item.id]} alt={item.title} className="card-img" />
-                      ) : (
-                        <div className="card-placeholder">
-                          <div className="placeholder-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                              <line x1="12" y1="5" x2="12" y2="19"></line>
-                              <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
+                {marqueeItems.map((item, index) => {
+                  const hasCustom = Boolean(photos[item.id]);
+                  return (
+                    <div
+                      key={'marquee-' + item.id + '-' + index}
+                      className="marquee-card"
+                      onClick={() => handleCardClick(item)}
+                      title="Click to inspect archival dossier"
+                    >
+                      {/* Card Media Container */}
+                      <div className="card-media">
+                        {hasCustom ? (
+                          <img src={photos[item.id]} alt={item.titleEn} className="card-img" />
+                        ) : (
+                          <div className="card-svg-wrap">
+                            <img src={item.svgPath} alt={item.titleEn} className="card-svg-asset" />
                           </div>
-                          <span className="placeholder-label">Add Picture</span>
-                          <span className="placeholder-sub">Click to upload</span>
+                        )}
+
+                        {/* Corner Archival Registration Ticks */}
+                        <span className="card-reg top-left">┌</span>
+                        <span className="card-reg top-right">┐</span>
+                        <span className="card-reg bottom-left">└</span>
+                        <span className="card-reg bottom-right">┘</span>
+
+                        {/* Top Accession Stamp */}
+                        <div className="card-header-badge">
+                          <span className="badge-acc">{item.accession}</span>
+                          <span className="badge-ar-name">{item.titleAr}</span>
                         </div>
-                      )}
-                      <span className="card-badge">{'0' + item.id}</span>
+
+                        {/* Hover Overlay with Action Buttons */}
+                        <div className="card-hover-overlay">
+                          <button
+                            type="button"
+                            className="overlay-btn primary"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCardClick(item);
+                            }}
+                          >
+                            INSPECT DOSSIER
+                          </button>
+                          <button
+                            type="button"
+                            className="overlay-btn secondary"
+                            onClick={(e) => triggerUploadForArtifact(item.id, e)}
+                            title="Replace slot with custom photograph"
+                          >
+                            {hasCustom ? 'CHANGE PHOTO' : '+ ADD PHOTO'}
+                          </button>
+                          {hasCustom && (
+                            <button
+                              type="button"
+                              className="overlay-btn reset"
+                              onClick={(e) => resetPhoto(item.id, e)}
+                            >
+                              RESET EMBLEM
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Card Information Footer */}
+                      <div className="card-info">
+                        <div className="card-title-row">
+                          <span className="card-plate">{item.number} / VI</span>
+                          <span className="card-name">{item.titleEn}</span>
+                          <span className="card-arabic-title">{item.titleAr}</span>
+                        </div>
+                        <span className="card-dyad">{item.dyadEn}</span>
+                        <span className="card-class">{item.classification}</span>
+                      </div>
                     </div>
-                    <div className="card-info">
-                      <span className="card-title">{item.title}</span>
-                      <span className="card-tag">{item.tag}</span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
-            {/* Hidden native file input for upload */}
+            {/* Hidden native file input for optional user photo replacement */}
             <input
               type="file"
               ref={fileInputRef}
@@ -224,25 +411,271 @@ export default function App() {
             />
           </section>
 
-          {/* EDITORIAL GALLERY GRID */}
-          <section className="gallery-grid" id="work">
-            <div className="gallery-card large">
-              <div className="image-placeholder">Editorial Image 01</div>
-            </div>
-            <div className="gallery-side">
-              <div className="gallery-card small">
-                <div className="image-placeholder">Editorial Image 02</div>
-              </div>
-              <div className="campaign-info">
-                <span className="campaign-tag">Campaign 01</span>
-                <p className="campaign-text">
-                  Architectural drapery and natural light studies.
+          {/* THE CATALOGUE INDEX - 6 BESPOKE ARCHIVAL PLATES GRID */}
+          <section className="catalogue-section" id="catalogue">
+            <div className="catalogue-header">
+              <div className="cat-title-block">
+                <span className="cat-kicker">MUSEUM CODEX CATALOGUE</span>
+                <h2 className="cat-heading">THE RECURRING SYMBOLS</h2>
+                <p className="cat-arabic-desc">
+                  كُلُّ رَمْزٍ هُوَ قِطْعَةٌ أَثَرِيَّةٌ مِنْ أَرْشِيفٍ وَاحِد: هُوِيَّة، عُزْلَة، فِكْر، شَوْق، صَبْر، وَوَجْد.
                 </p>
+              </div>
+              <div className="cat-stamp-box">
+                <span className="stamp-title">PRINT CERTIFICATE</span>
+                <span className="stamp-sub">STRICT MONOCHROME ONLY</span>
+                <span className="stamp-code">NO GRADIENT // NO COLOR</span>
+              </div>
+            </div>
+
+            <div className="catalogue-grid">
+              {ARCHIVE_ARTIFACTS.map((artifact) => {
+                const hasCustom = Boolean(photos[artifact.id]);
+                return (
+                  <article
+                    key={'cat-' + artifact.id}
+                    className="catalogue-entry"
+                    onClick={() => handleCardClick(artifact)}
+                  >
+                    <div className="entry-frame">
+                      {hasCustom ? (
+                        <img src={photos[artifact.id]} alt={artifact.titleEn} className="entry-img" />
+                      ) : (
+                        <img src={artifact.svgPath} alt={artifact.titleEn} className="entry-svg" />
+                      )}
+
+                      <span className="entry-reg tl">┌</span>
+                      <span className="entry-reg tr">┐</span>
+                      <span className="entry-reg bl">└</span>
+                      <span className="entry-reg br">┘</span>
+
+                      <div className="entry-plate-tag">{artifact.plate}</div>
+                    </div>
+
+                    <div className="entry-meta">
+                      <div className="entry-top">
+                        <span className="entry-accession">{artifact.accession}</span>
+                        <span className="entry-arabic-name">{artifact.titleAr}</span>
+                      </div>
+                      <h3 className="entry-title">{artifact.titleEn}</h3>
+                      <h4 className="entry-dyad">{artifact.dyadEn}</h4>
+                      <p className="entry-quote-ar">{artifact.quoteAr}</p>
+                      <p className="entry-quote-en">"{artifact.quoteEn}"</p>
+
+                      <div className="entry-actions">
+                        <button
+                          type="button"
+                          className="btn-inspect"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCardClick(artifact);
+                          }}
+                        >
+                          EXAMINE ARTIFACT →
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-upload"
+                          onClick={(e) => triggerUploadForArtifact(artifact.id, e)}
+                        >
+                          {hasCustom ? 'EDIT PHOTO' : 'REPLACE PIC'}
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* MANIFESTO / PHILOSOPHY STATEMENT */}
+          <section className="manifesto-section" id="manifesto">
+            <div className="manifesto-inner">
+              <span className="manifesto-tag">ARCHIVAL MANIFESTO // المَانِفِسْتُو</span>
+              <h2 className="manifesto-title">
+                ON THE POETICS OF THE MONOCHROME ARCHIVE
+              </h2>
+              <div className="manifesto-columns">
+                <div className="manifesto-col">
+                  <h4 className="col-subheading">I. THE PURITY OF BLACK INK</h4>
+                  <p className="col-text">
+                    Color is an ephemeral distraction. By reducing the visual architecture to pure black and pure white, every silhouette carries the moral weight of a carved monument. In the tradition of early Arabic lithography and classical woodcut printing, negative space is not emptiness—it is the breath that allows thought to endure.
+                  </p>
+                  <p className="col-arabic">
+                    السَّوَادُ لَيْسَ غِيَاباً لِلضَّوْءِ، بَلْ هُوَ ثِقَلُ الحِبْرِ عَلَى مَدَارِ الزَّمَان. وَالبَيَاضُ هُوَ الصَّمْتُ الَّذِي يَسْمَحُ لِلْمَعْنَى بِالحُضُور.
+                  </p>
+                </div>
+                <div className="manifesto-col">
+                  <h4 className="col-subheading">II. THE CHIVALRIC CODEX</h4>
+                  <p className="col-text">
+                    From the tragic stoicism of pre-Islamic poetry to the existential exile of Beirut’s vinyl echoes, this archive stands at the intersection of literary severity and modern luxury. The seal represents our name; the sword, our endurance; the dervish, our ultimate surrender to the infinite.
+                  </p>
+                  <p className="col-arabic">
+                    مِنْ سَيْفِ المُتَنَبِّي إِلَى أُسْطُوَانَةِ بَيْرُوت، تَتَشَكَّلُ هَذِهِ المَحْفُوظَاتُ كَمَقَامٍ أَدَبِيٍّ مُعَاصِرٍ يُخَاطِبُ عَيْنَ الحَاضِرِ بِصَلَابَةِ الأَمْس.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
+
+          {/* COLOPHON / PRINT RECORD FOOTER */}
+          <footer className="colophon-section" id="colophon">
+            <div className="colophon-grid">
+              <div className="colophon-block">
+                <span className="col-label">ESTATE</span>
+                <p className="col-val">THE PERSONAL ARCHIVE OF ALAA</p>
+                <p className="col-val-sub">BEIRUT • MILAN • PARIS</p>
+              </div>
+              <div className="colophon-block">
+                <span className="col-label">CATALOGUE STATUS</span>
+                <p className="col-val">CODEX MMXXVI // VOL. I</p>
+                <p className="col-val-sub">REGISTERED MONOCHROME REPOSITORY</p>
+              </div>
+              <div className="colophon-block">
+                <span className="col-label">TYPOGRAPHY</span>
+                <p className="col-val">AMIRI • CINZEL • SPACE MONO</p>
+                <p className="col-val-sub">BULAQ PRESS & ROMAN EPIGRAPHY</p>
+              </div>
+              <div className="colophon-block">
+                <span className="col-label">DISCIPLINE</span>
+                <p className="col-val">STRICT BLACK & WHITE</p>
+                <p className="col-val-sub">ZERO GRADIENTS // ZERO TONES</p>
+              </div>
+            </div>
+
+            <div className="colophon-bottom">
+              <div className="bottom-left">
+                <span className="seal-tick">⌖</span>
+                <span>COPYRIGHT © MMXXVI THE ARCHIVE. ALL RIGHTS PRESERVED.</span>
+              </div>
+              <div className="bottom-right">
+                <span className="ar-colophon">حُفِظَتْ هَذِهِ المَحْفُوظَاتُ بِحِبْرٍ أَسْوَدَ لَا يَبِيد</span>
+              </div>
+            </div>
+          </footer>
         </main>
       </motion.div>
+
+      {/* ARCHIVAL DOSSIER MODAL (Full Screen Inspection Dialog) */}
+      <AnimatePresence>
+        {selectedArtifact && (
+          <motion.div
+            className="dossier-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedArtifact(null)}
+          >
+            <motion.div
+              className="dossier-modal"
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Close Button */}
+              <button
+                type="button"
+                className="dossier-close"
+                onClick={() => setSelectedArtifact(null)}
+                title="Close dossier"
+              >
+                ✕
+              </button>
+
+              <div className="dossier-layout">
+                {/* Visual Plate Column */}
+                <div className="dossier-visual">
+                  <div className="dossier-frame">
+                    {photos[selectedArtifact.id] ? (
+                      <img
+                        src={photos[selectedArtifact.id]}
+                        alt={selectedArtifact.titleEn}
+                        className="dossier-img"
+                      />
+                    ) : (
+                      <img
+                        src={selectedArtifact.svgPath}
+                        alt={selectedArtifact.titleEn}
+                        className="dossier-svg"
+                      />
+                    )}
+                    <span className="modal-reg tl">┌</span>
+                    <span className="modal-reg tr">┐</span>
+                    <span className="modal-reg bl">└</span>
+                    <span className="modal-reg br">┘</span>
+                  </div>
+
+                  <div className="dossier-photo-tools">
+                    <button
+                      type="button"
+                      className="dossier-action-btn"
+                      onClick={() => triggerUploadForArtifact(selectedArtifact.id)}
+                    >
+                      {photos[selectedArtifact.id] ? 'REPLACE CUSTOM PHOTO' : '+ UPLOAD CUSTOM PHOTO'}
+                    </button>
+                    {photos[selectedArtifact.id] && (
+                      <button
+                        type="button"
+                        className="dossier-action-btn secondary"
+                        onClick={() => resetPhoto(selectedArtifact.id)}
+                      >
+                        REVERT TO ARCHIVAL EMBLEM
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Archival Record Details Column */}
+                <div className="dossier-content">
+                  <div className="dossier-acc-header">
+                    <span className="dossier-acc-code">{selectedArtifact.accession}</span>
+                    <span className="dossier-plate-no">{selectedArtifact.plate} OF VI</span>
+                  </div>
+
+                  <h2 className="dossier-ar-title">{selectedArtifact.titleAr}</h2>
+                  <h3 className="dossier-en-title">{selectedArtifact.titleEn}</h3>
+                  <h4 className="dossier-dyad-title">{selectedArtifact.dyadEn}</h4>
+
+                  <div className="dossier-info-table">
+                    <div className="table-row">
+                      <span className="row-k">CLASSIFICATION</span>
+                      <span className="row-v">{selectedArtifact.classification}</span>
+                    </div>
+                    <div className="table-row">
+                      <span className="row-k">ART DIRECTION</span>
+                      <span className="row-v">{selectedArtifact.symbolism}</span>
+                    </div>
+                    <div className="table-row">
+                      <span className="row-k">AUTHENTICITY</span>
+                      <span className="row-v">PURE BLACK & WHITE // VECTOR INTAGLIO</span>
+                    </div>
+                  </div>
+
+                  <div className="dossier-quote-block">
+                    <p className="dossier-quote-ar">{selectedArtifact.quoteAr}</p>
+                    <p className="dossier-quote-en">"{selectedArtifact.quoteEn}"</p>
+                  </div>
+
+                  <div className="dossier-stamp-footer">
+                    <div className="stamp-seal">
+                      <span>VERIFIED ARTIFACT</span>
+                      <span>CODEX ALAA // MMXXVI</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="dossier-dismiss-btn"
+                      onClick={() => setSelectedArtifact(null)}
+                    >
+                      CLOSE EXAMINATION
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
