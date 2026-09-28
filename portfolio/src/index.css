@@ -54,7 +54,7 @@ html, body {
 }
 
 /* ==========================================================================
-   NAVBAR (ARCHIVAL HEADER)
+   NAVBAR
    ========================================================================== */
 .navbar-header {
   position: fixed;
@@ -93,17 +93,9 @@ html, body {
   text-transform: uppercase;
 }
 
-.nav-brand-arabic {
-  font-family: var(--font-arabic);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: 0.05em;
-}
-
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
 }
 
@@ -115,8 +107,6 @@ html, body {
   letter-spacing: 0.2em;
   color: var(--ink);
   text-decoration: none;
-  position: relative;
-  padding: 4px 0;
   transition: opacity 0.2s ease;
 }
 
@@ -126,11 +116,11 @@ html, body {
 }
 
 /* ==========================================================================
-   MAIN CONTENT CONTAINER
+   MAIN CONTENT
    ========================================================================== */
 .main-content {
   padding-top: 10rem;
-  padding-bottom: 8rem;
+  padding-bottom: 4rem;
   width: 100%;
 }
 
@@ -142,133 +132,37 @@ html, body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 7rem;
+  margin-bottom: 6rem;
   padding: 0 2rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.archival-stamp-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.25rem;
-  border: 1px solid var(--ink);
-  padding: 6px 18px;
-  margin-bottom: 2.5rem;
-  background-color: var(--paper);
-}
-
-.badge-reg {
+.hero-tag {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-}
-
-.badge-text {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
   text-transform: uppercase;
-}
-
-.badge-arabic {
-  font-family: var(--font-arabic);
-  font-size: 13px;
-  font-weight: 700;
-  border-left: 1px solid var(--ink);
-  padding-left: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(5.5rem, 17vw, 14rem);
+  font-size: clamp(5.5rem, 18vw, 15rem);
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 0.82;
   text-align: center;
-  margin: 0 0 2rem 0;
-  color: var(--ink);
-}
-
-.hero-tagline-wrap {
-  max-width: 760px;
-  margin: 0 auto 3rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.hero-tagline-ar {
-  font-family: var(--font-arabic);
-  font-size: 1.35rem;
-  line-height: 1.8;
-  font-weight: 700;
-  color: var(--ink);
   margin: 0;
-}
-
-.hero-tagline-en {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-  margin: 0;
-  font-weight: 400;
-}
-
-.archival-spec-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  padding: 1rem 2rem;
-  width: 100%;
-  max-width: 900px;
-}
-
-.spec-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.spec-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
   color: var(--ink);
 }
-
-.spec-val {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.spec-divider {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--ink);
-}
-
 
 /* ==========================================================================
-   EXPERIMENTAL FASHION EDITORIAL STRIP (CONTINUOUS MOVING ARCHIVE MARQUEE)
-   Pure Black & White. Generous Whitespace. Subtle Asymmetry & Rotation.
-   Order: SEAL → VINYL → BUST → ROSE → SWORD → DERVISH → repeat
+   CONTINUOUS MOVING RIVER OF OBJECTS (CODEX STRIP)
    ========================================================================== */
-
 .archive-strip-section {
   width: 100vw;
   position: relative;
@@ -284,7 +178,6 @@ html, body {
   user-select: none;
 }
 
-/* Minimalist Editorial Header Ribbon */
 .strip-editorial-header {
   max-width: 100%;
   padding: 0 3rem 1.25rem 3rem;
@@ -306,14 +199,6 @@ html, body {
   gap: 1.25rem;
 }
 
-.strip-header-ar {
-  font-family: var(--font-arabic);
-  font-size: 13px;
-  font-weight: 700;
-  border-left: 1px solid var(--ink);
-  padding-left: 1rem;
-}
-
 .strip-order-guide {
   font-size: 9px;
   letter-spacing: 0.15em;
@@ -324,7 +209,7 @@ html, body {
   font-size: 13px;
 }
 
-/* Strip Viewport & Seamless Infinite Track */
+/* Viewport & Seamless Infinite Track */
 .strip-viewport {
   width: 100%;
   overflow: hidden;
@@ -360,7 +245,7 @@ html, body {
 }
 
 /* ==========================================================================
-   SPECIMEN PLATE CONTAINER (Editorial Fashion Monograph Specimen)
+   SPECIMEN PLATE CONTAINER
    ========================================================================== */
 .specimen-plate-container {
   width: 340px;
@@ -370,12 +255,11 @@ html, body {
   flex-direction: column;
   gap: 1rem;
   padding: 0 1.5rem;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .specimen-plate-container:hover {
-  /* Subtle focus lift without breaking editorial flow */
   filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.08));
 }
 
@@ -402,7 +286,6 @@ html, body {
   color: var(--ink);
 }
 
-/* Floating Art Frame with Pure White Space */
 .specimen-art-frame {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -413,7 +296,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-width 0.2s ease;
 }
 
 .specimen-plate-container:hover .specimen-art-frame {
@@ -427,7 +310,6 @@ html, body {
   display: block;
 }
 
-/* Minimalist Corner Brackets */
 .specimen-tick {
   position: absolute;
   font-family: var(--font-mono);
@@ -442,7 +324,6 @@ html, body {
 .specimen-tick.bl { bottom: 4px; left: 4px; }
 .specimen-tick.br { bottom: 4px; right: 4px; }
 
-/* Understated Hover Cue */
 .specimen-hover-cue {
   position: absolute;
   inset: 0;
@@ -451,7 +332,6 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   opacity: 0;
   transition: opacity 0.2s ease;
   border: 1px solid var(--ink);
@@ -463,20 +343,12 @@ html, body {
 
 .cue-action {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   color: var(--ink);
 }
 
-.cue-sub {
-  font-family: var(--font-serif);
-  font-size: 11px;
-  font-style: italic;
-  color: var(--ink);
-}
-
-/* Specimen Footer Label */
 .specimen-plate-footer {
   display: flex;
   flex-direction: column;
@@ -521,7 +393,7 @@ html, body {
 }
 
 /* ==========================================================================
-   RESTRAINED ARCHIVAL SEPARATOR COMPONENT
+   RESTRAINED ARCHIVAL SEPARATOR
    ========================================================================== */
 .archival-separator-unit {
   display: flex;
@@ -586,15 +458,6 @@ html, body {
   white-space: nowrap;
 }
 
-.sep-sub-text {
-  font-family: var(--font-mono);
-  font-size: 7.5px;
-  letter-spacing: 0.12em;
-  color: var(--ink);
-  white-space: nowrap;
-  opacity: 0.75;
-}
-
 .sep-crosshair {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -603,7 +466,7 @@ html, body {
   margin-top: 4px;
 }
 
-/* Editorial Footer Ribbon */
+/* Strip Footer Ribbon */
 .strip-editorial-footer {
   max-width: 100%;
   padding: 1.25rem 3rem 0 3rem;
@@ -617,8 +480,6 @@ html, body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink);
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .strip-footer-reg {
@@ -629,386 +490,33 @@ html, body {
   letter-spacing: 0.22em;
 }
 
-.strip-footer-pause-note {
-  font-size: 8.5px;
-  letter-spacing: 0.15em;
-  opacity: 0.8;
-}
-
 /* ==========================================================================
-   CATALOGUE INDEX SECTION
+   MINIMAL CLEAN FOOTER
    ========================================================================== */
-.catalogue-section {
+.clean-minimal-footer {
   max-width: 1400px;
-  margin: 6rem auto;
-  padding: 0 3rem;
-}
-
-.catalogue-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 2rem;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.cat-title-block {
-  max-width: 700px;
-}
-
-.cat-kicker {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-
-.cat-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  margin: 0.5rem 0 1rem 0;
-}
-
-.cat-arabic-desc {
-  font-family: var(--font-arabic);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.8;
-  margin: 0;
-}
-
-.cat-stamp-box {
-  border: 2px solid var(--ink);
-  padding: 1rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-}
-
-.stamp-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-}
-
-.stamp-sub, .stamp-code {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-}
-
-.catalogue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-}
-
-.catalogue-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  cursor: pointer;
-  border: 1px solid var(--ink);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.catalogue-entry:hover {
-  transform: translateY(-6px);
-  box-shadow: 8px 8px 0px var(--ink);
-}
-
-.entry-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border: 2px solid var(--ink);
-  position: relative;
-  background-color: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.entry-svg, .entry-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.entry-reg {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-}
-.entry-reg.tl { top: 6px; left: 6px; }
-.entry-reg.tr { top: 6px; right: 6px; }
-.entry-reg.bl { bottom: 6px; left: 6px; }
-.entry-reg.br { bottom: 6px; right: 6px; }
-
-.entry-plate-tag {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  background-color: var(--paper);
-  border: 1px solid var(--ink);
-  padding: 2px 6px;
-}
-
-.entry-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.entry-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.entry-accession {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-
-.entry-arabic-name {
-  font-family: var(--font-arabic);
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.entry-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  margin: 0;
-}
-
-.entry-dyad {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  margin: 0;
-}
-
-.entry-quote-ar {
-  font-family: var(--font-arabic);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.7;
-  margin: 0.5rem 0 0 0;
-}
-
-.entry-quote-en {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  font-style: italic;
-  margin: 0;
-}
-
-.entry-actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin: 4rem auto 0 auto;
+  padding: 2rem 3rem;
   border-top: 1px solid var(--ink);
-}
-
-.btn-inspect {
-  flex: 1;
-  padding: 8px 12px;
-  background-color: var(--ink);
-  color: var(--paper);
-  border: 1px solid var(--ink);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  cursor: pointer;
-}
-
-.btn-inspect:hover {
-  background-color: var(--paper);
-  color: var(--ink);
-}
-
-.btn-upload {
-  padding: 8px 12px;
-  background-color: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--ink);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  cursor: pointer;
-}
-
-.btn-upload:hover {
-  background-color: var(--ink);
-  color: var(--paper);
-}
-
-/* ==========================================================================
-   MANIFESTO SECTION
-   ========================================================================== */
-.manifesto-section {
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
-  padding: 6rem 3rem;
-  background-color: var(--paper);
-}
-
-.manifesto-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.manifesto-tag {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-
-.manifesto-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  margin: 1rem 0 3.5rem 0;
-}
-
-.manifesto-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-}
-
-.col-subheading {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  margin: 0 0 1.25rem 0;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 0.5rem;
-}
-
-.col-text {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  line-height: 1.8;
-  margin: 0 0 1.5rem 0;
-}
-
-.col-arabic {
-  font-family: var(--font-arabic);
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.9;
-  margin: 0;
-}
-
-/* ==========================================================================
-   COLOPHON / FOOTER
-   ========================================================================== */
-.colophon-section {
-  max-width: 1400px;
-  margin: 6rem auto 0 auto;
-  padding: 0 3rem 4rem 3rem;
-}
-
-.colophon-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  border-top: 2px solid var(--ink);
-  padding-top: 3rem;
-  margin-bottom: 4rem;
-}
-
-.col-label {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.col-val {
-  font-family: var(--font-serif);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  margin: 0 0 4px 0;
-}
-
-.col-val-sub {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.1em;
-  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.2em;
 }
 
-.colophon-bottom {
+.footer-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--ink);
-  padding-top: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.bottom-left {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-}
-
-.seal-tick {
-  font-size: 14px;
-}
-
-.ar-colophon {
-  font-family: var(--font-arabic);
-  font-size: 14px;
-  font-weight: 700;
 }
 
 /* ==========================================================================
-   ARCHIVAL DOSSIER MODAL
+   CLEAN MODAL
    ========================================================================== */
 .dossier-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.88);
+  background-color: rgba(0, 0, 0, 0.85);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -1018,25 +526,24 @@ html, body {
 
 .dossier-modal {
   background-color: var(--paper);
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   width: 100%;
-  max-width: 1100px;
+  max-width: 780px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  padding: 3rem;
-  box-shadow: 16px 16px 0px #000000;
+  padding: 2.5rem;
 }
 
 .dossier-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--ink);
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--ink);
   background-color: var(--paper);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -1050,23 +557,17 @@ html, body {
   color: var(--paper);
 }
 
-.dossier-layout {
+.clean-modal-layout {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: 3.5rem;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.dossier-visual {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.dossier-frame {
+.clean-modal-frame {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border: 2px solid var(--ink);
+  border: 1px solid var(--ink);
   position: relative;
   background-color: var(--paper);
   display: flex;
@@ -1084,208 +585,111 @@ html, body {
 .modal-reg {
   position: absolute;
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
-.modal-reg.tl { top: 8px; left: 8px; }
-.modal-reg.tr { top: 8px; right: 8px; }
-.modal-reg.bl { bottom: 8px; left: 8px; }
-.modal-reg.br { bottom: 8px; right: 8px; }
+.modal-reg.tl { top: 6px; left: 6px; }
+.modal-reg.tr { top: 6px; right: 6px; }
+.modal-reg.bl { bottom: 6px; left: 6px; }
+.modal-reg.br { bottom: 6px; right: 6px; }
 
-.dossier-photo-tools {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.dossier-action-btn {
-  width: 100%;
-  padding: 10px 16px;
-  background-color: var(--ink);
-  color: var(--paper);
-  border: 2px solid var(--ink);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.dossier-action-btn:hover {
-  background-color: var(--paper);
-  color: var(--ink);
-}
-
-.dossier-action-btn.secondary {
-  background-color: var(--paper);
-  color: var(--ink);
-}
-
-.dossier-action-btn.secondary:hover {
-  background-color: var(--ink);
-  color: var(--paper);
-}
-
-.dossier-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.dossier-acc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 0.75rem;
-}
-
-.dossier-acc-code, .dossier-plate-no {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-}
-
-.dossier-ar-title {
-  font-family: var(--font-arabic);
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin: 0.5rem 0 0 0;
-  line-height: 1.2;
-}
-
-.dossier-en-title {
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  margin: 0;
-}
-
-.dossier-dyad-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.dossier-info-table {
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-}
-
-.table-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.row-k {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-
-.row-v {
-  font-family: var(--font-serif);
-  font-size: 11px;
-  font-weight: 600;
-  text-align: right;
-}
-
-.dossier-quote-block {
-  border-left: 3px solid var(--ink);
-  padding-left: 1.25rem;
+.clean-modal-info {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin: 0.5rem 0;
 }
 
-.dossier-quote-ar {
-  font-family: var(--font-arabic);
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.8;
-  margin: 0;
-}
-
-.dossier-quote-en {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  font-style: italic;
-  margin: 0;
-}
-
-.dossier-stamp-footer {
+.modal-header-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--ink);
-  padding-top: 1.5rem;
-  margin-top: 1rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 6px;
 }
 
-.stamp-seal {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-
-.dossier-dismiss-btn {
-  padding: 8px 16px;
-  background-color: var(--ink);
-  color: var(--paper);
-  border: 1px solid var(--ink);
+.modal-acc, .modal-plate {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.15em;
-  cursor: pointer;
 }
 
-.dossier-dismiss-btn:hover {
+.modal-title-en {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  margin: 0.5rem 0 0 0;
+}
+
+.modal-title-ar {
+  font-family: var(--font-arabic);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.modal-dyad {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.modal-button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ink);
+}
+
+.clean-modal-btn {
+  width: 100%;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.clean-modal-btn.primary {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+.clean-modal-btn.primary:hover {
   background-color: var(--paper);
   color: var(--ink);
 }
 
-/* ==========================================================================
-   RESPONSIVE QUERIES
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .catalogue-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .colophon-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .manifesto-columns {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .dossier-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+.clean-modal-btn.secondary {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.clean-modal-btn.secondary:hover {
+  background-color: var(--ink);
+  color: var(--paper);
 }
 
+.clean-modal-btn.dismiss {
+  background: none;
+  border: 1px dashed var(--ink);
+  color: var(--ink);
+}
+.clean-modal-btn.dismiss:hover {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 @media (max-width: 768px) {
   .navbar-header {
     padding: 0 1.5rem;
@@ -1299,25 +703,16 @@ html, body {
     padding-top: 7rem;
   }
 
-  .catalogue-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .colophon-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section-header {
+  .strip-editorial-header, .strip-editorial-footer {
     padding: 0 1.5rem;
   }
 
-  .marquee-card {
-    width: 250px;
+  .specimen-plate-container {
+    width: 260px;
   }
 
-  .catalogue-section, .manifesto-section, .colophon-section {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  .clean-modal-layout {
+    grid-template-columns: 1fr;
   }
 
   .dossier-modal {
