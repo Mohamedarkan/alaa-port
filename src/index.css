@@ -6,7 +6,7 @@
 
 :root {
   --ink: #000000;
-  --paper: #ffffff;
+  --paper: #F5F4F0;
   --font-serif: 'Cinzel', serif;
   --font-arabic: 'Amiri', 'Traditional Arabic', serif;
   --font-mono: 'Space Mono', monospace;
@@ -16,15 +16,16 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {
   margin: 0;
   padding: 0;
-  background-color: var(--paper);
+  background-color: #F5F4F0 !important;
   color: var(--ink);
   font-family: var(--font-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: filter 0.4s ease;
 }
 
 /* ==========================================================================
@@ -33,7 +34,7 @@ html, body {
 .portfolio-wrapper {
   min-height: 100vh;
   position: relative;
-  background-color: var(--paper);
+  background-color: #F5F4F0 !important;
 }
 
 .avatar-container {
@@ -51,22 +52,21 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* ==========================================================================
    NAVBAR
    ========================================================================== */
 .navbar-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
+  position: relative;
+  height: 85px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3rem;
-  background-color: var(--paper);
+  padding: 0 2.5rem;
+  background-color: var(--paper) !important;
   border-bottom: 2px solid var(--ink);
   z-index: 50;
 }
@@ -75,6 +75,8 @@ html, body {
   width: 55px;
   height: 55px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-brand {
@@ -119,7 +121,7 @@ html, body {
    MAIN CONTENT
    ========================================================================== */
 .main-content {
-  padding-top: 10rem;
+  padding-top: 3.5rem;
   padding-bottom: 4rem;
   width: 100%;
 }
@@ -174,8 +176,6 @@ html, body {
   margin-right: -50vw;
   overflow: hidden;
   background-color: var(--paper);
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
   padding: 2.5rem 0 3.5rem 0;
   user-select: none;
 }
@@ -186,7 +186,6 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--ink);
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
@@ -213,10 +212,15 @@ html, body {
 
 /* Viewport & Seamless Infinite Track */
 .strip-viewport {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 110px;
+  right: 0;
   overflow: hidden;
-  position: relative;
-  padding: 4.5rem 0 5rem 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }
 
 .strip-motion-track {
@@ -224,8 +228,8 @@ html, body {
   align-items: center;
   width: max-content;
   will-change: transform;
-  /* Continuously glides horizontally from Left to Right */
-  animation: editorial-strip-flow 62s linear infinite;
+  /* Continuously glides horizontally from Right to Left at accelerated speed */
+  animation: editorial-strip-flow 42s linear infinite;
 }
 
 .strip-motion-track:hover {
@@ -234,10 +238,10 @@ html, body {
 
 @keyframes editorial-strip-flow {
   0% {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -250,97 +254,73 @@ html, body {
    SPECIMEN PLATE CONTAINER
    ========================================================================== */
 .specimen-plate-container {
-  width: 340px;
+  width: max-content;
   flex-shrink: 0;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 0 1.5rem;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Generous horizontal spacing of 120vw between consecutive items */
+  margin: 0 60vw;
   position: relative;
+  pointer-events: auto;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-.specimen-plate-container:hover {
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.08));
+.specimen-plate-container:focus,
+.specimen-plate-container:focus-visible,
+.specimen-plate-container:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
-.specimen-plate-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 4px;
+.sword-artifact,
+.sword-artifact * {
+  pointer-events: none !important;
+  cursor: default !important;
+  user-select: none !important;
 }
 
-.specimen-acc {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--ink);
-}
-
-.specimen-ar-kicker {
-  font-family: var(--font-arabic);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
+.navbar-scratch-canvas {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  pointer-events: none !important;
+  z-index: 6;
+  user-select: none !important;
+  overflow: hidden;
 }
 
 .specimen-art-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background-color: var(--paper);
-  border: 1px solid var(--ink);
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
-  transition: border-width 0.2s ease;
-}
-
-.specimen-plate-container:hover .specimen-art-frame {
-  border-width: 1.5px;
+  transition: transform 0.2s ease;
 }
 
 .specimen-graphic-svg, .specimen-graphic-img {
-  width: 100%;
-  height: 100%;
+  height: 64px;
+  width: auto;
   object-fit: contain;
   display: block;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
 }
 
+.specimen-hover-cue,
 .specimen-tick {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1;
-  pointer-events: none;
-}
-.specimen-tick.tl { top: 4px; left: 4px; }
-.specimen-tick.tr { top: 4px; right: 4px; }
-.specimen-tick.bl { bottom: 4px; left: 4px; }
-.specimen-tick.br { bottom: 4px; right: 4px; }
-
-.specimen-hover-cue {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.94);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  border: 1px solid var(--ink);
-}
-
-.specimen-plate-container:hover .specimen-hover-cue {
-  opacity: 1;
+  display: none !important;
 }
 
 .cue-action {
@@ -709,9 +689,7 @@ html, body {
     padding: 0 1.5rem;
   }
 
-  .specimen-plate-container {
-    width: 260px;
-  }
+
 
   .clean-modal-layout {
     grid-template-columns: 1fr;
@@ -720,4 +698,192 @@ html, body {
   .dossier-modal {
     padding: 1.5rem;
   }
+}
+
+.pop-out-shader {
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.08)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.04));
+  will-change: transform, filter;
+}
+
+.round-disk {
+  border-radius: 50%;
+}
+
+.interest-shmag, .interest-dallah {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* ==========================================================================
+   CINEMATIC DALLAH COFFEE POUR OVERLAY SEQUENCE
+   ========================================================================== */
+.dallah-cinematic-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: all;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Phase 1 & 2: Fixed High-Resolution Dallah Hero Clone */
+.dallah-hero-clone {
+  position: fixed;
+  top: 32%;
+  left: 50%;
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%) rotate(0deg) scale(0.35);
+  transform-origin: center center;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  z-index: 1002;
+  pointer-events: none;
+}
+
+/* Phase 1: Breakout & Center */
+.stage-breakout .dallah-hero-clone {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+/* Phase 2: The Tip (35deg forward tilt dipping the right spout downward) */
+.stage-pour .dallah-hero-clone,
+.stage-fill .dallah-hero-clone {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(35deg) scale(1);
+  transition: transform 0.45s cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+/* Phase 4: Fade Out Dallah */
+.stage-reveal .dallah-hero-clone {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(35deg) scale(0.96);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.dallah-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.4)) drop-shadow(0 6px 15px rgba(0, 0, 0, 0.25));
+}
+
+/* Phase 2: Espresso Stream originating directly from outermost tip of spout */
+.dallah-espresso-stream {
+  position: fixed;
+  left: calc(50% + 103px);
+  top: calc(32% + 18px);
+  width: 8px;
+  height: 0;
+  background: linear-gradient(to right, #120904, #2A160A 35%, #4C2B15 65%, #1E120A);
+  box-shadow: 0 0 12px rgba(30, 18, 10, 0.7), 0 0 3px rgba(214, 162, 112, 0.4);
+  border-radius: 4px;
+  z-index: 1003; /* Positioned directly in front of the spout opening */
+  opacity: 0;
+  transform-origin: top center;
+  pointer-events: none;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.stage-pour .dallah-espresso-stream,
+.stage-fill .dallah-espresso-stream {
+  opacity: 1;
+  height: calc(100vh - (32% + 18px));
+}
+
+.stage-reveal .dallah-espresso-stream {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Phase 3 & 4: Rising Fill & Smooth Reveal */
+.dallah-rising-fill {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 0vh;
+  background-color: #1E120A;
+  z-index: 1000;
+  pointer-events: none;
+  transition: height 0.95s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+  box-shadow: 0 -12px 35px rgba(30, 18, 10, 0.85);
+  border-top: 3px solid rgba(197, 155, 99, 0.65);
+}
+
+.stage-fill .dallah-rising-fill {
+  height: 100vh;
+  opacity: 1;
+}
+
+.stage-reveal .dallah-rising-fill {
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* ==========================================================================
+   UNIFIED THEME SYSTEM (DEFAULT | COFFEE | MONOCHROME)
+   ========================================================================== */
+
+/* 1. Default Museum Paper Theme */
+[data-theme="default"],
+body[data-theme="default"] {
+  --ink: #000000;
+  --paper: #F5F4F0;
+}
+
+/* 2. Coffee Theme (Warm Roasted Editorial) */
+[data-theme="coffee"],
+body[data-theme="coffee"] {
+  --ink: #26140B;
+  --paper: #EFE4D6;
+  --coffee-brass: #C59B63;
+}
+
+[data-theme="coffee"] html,
+[data-theme="coffee"] body,
+[data-theme="coffee"] #root,
+[data-theme="coffee"] .portfolio-wrapper {
+  background-color: #EFE4D6 !important;
+  color: #26140B !important;
+}
+
+[data-theme="coffee"] .navbar-header {
+  background-color: #EFE4D6 !important;
+  border-bottom: 2px solid #26140B !important;
+}
+
+[data-theme="coffee"] .hero-title {
+  color: #26140B !important;
+}
+
+[data-theme="coffee"] .nav-brand-title,
+[data-theme="coffee"] .nav-links a,
+[data-theme="coffee"] .hero-tag,
+[data-theme="coffee"] .clean-minimal-footer,
+[data-theme="coffee"] .clean-minimal-footer .footer-line {
+  color: #26140B !important;
+  border-color: #26140B !important;
+}
+
+[data-theme="coffee"] .pop-out-shader {
+  filter: drop-shadow(0 20px 35px rgba(38, 20, 11, 0.12)) drop-shadow(0 8px 16px rgba(38, 20, 11, 0.08));
+}
+
+/* 3. Monochrome Theme: Complete de-saturation without breaking CSS variable inheritance or fixed positioning */
+html[data-theme="monochrome"] {
+  filter: grayscale(100%) contrast(1.04);
+}
+
+[data-theme="monochrome"],
+body[data-theme="monochrome"] {
+  --ink: #000000;
+  --paper: #F5F4F0;
+}
+
+[data-theme="monochrome"] .navbar-header {
+  border-bottom: 2px solid #000000 !important;
 }
