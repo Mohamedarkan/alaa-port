@@ -61,7 +61,12 @@ export const ARCHIVE_SEPARATORS = [
 ];
 
 export const ARTIFACT_EDITORIAL_TRANSFORMS = {
-  1: { rotate: '54deg', translateY: '9.5px', scale: 1.15 }, // Natural drag tilt: pommel kissing divider line, blade trailing gracefully behind leftward motion
+  1: {
+    cssTransform: 'rotate(145deg) scaleX(-1) translateY(-12px) scale(1.15)',
+    rotate: '145deg',
+    translateY: '-12px',
+    scale: 1.15
+  }, // Sword flipped blade-downward dragging the divider line
   2: { rotate: '2deg', translateY: '0px', scale: 1.20 },    // Dallah (compensated for 20.6% transparent padding)
   3: { rotate: '-1deg', translateY: '0px', scale: 1.00 },   // Statue (fills 96.6% canvas)
   4: { rotate: '4deg', translateY: '0px', scale: 1.00 },    // Rose (fills 97.9% canvas)
@@ -305,7 +310,7 @@ export default function App() {
                           tabIndex={(isShmag || isDallah) ? 0 : undefined}
                           aria-label={isShmag ? 'Toggle Monochrome Theme' : isDallah ? 'Pour Dallah Coffee' : artifact.titleEn}
                           style={{
-                            transform: `translateY(${transform.translateY}) rotate(${transform.rotate}) scale(${transform.scale})`,
+                            transform: transform.cssTransform || `translateY(${transform.translateY}) rotate(${transform.rotate}) scale(${transform.scale})`,
                             zIndex: transform.zIndex || 1,
                             cursor: isSword ? 'default' : (isShmag || isDallah) ? 'pointer' : 'default',
                             pointerEvents: isSword ? 'none' : (isShmag || isDallah) ? 'auto' : 'none',
